@@ -21,20 +21,31 @@ generateParagraph_button.addEventListener('click', function (e) {
         let new_Array = text.slice(0, `${noO0f_Pargraphs}`);
          display_text(new_Array);
      }
-       // if the user enters value beyond our text array then we add the extra index value to that
-       else {
-        let temp_Paragraphs = noO0f_Pargraphs - text.length;
-        let new_Array = text;
-        new_Array = new_Array.concat(text.slice(0 , temp_Paragraphs));
+     else { // if given paragraph value is more than the array index we have we add the extra index values to the array with the help of random numbers
+       let counter = noO0f_Pargraphs - text.length ;
+       new_Array = text;
+       recursion();
+       function recursion(){
+         if(counter >0){
+         while(counter > 0)
+         {
+           temp = Math.floor(Math.random() * 10);
+           new_Array = new_Array.concat(text.slice(temp - 1 , temp)); 
+            counter--;
+            recursion();
+         }
+        }
         display_text(new_Array);
-      }
+       }
+     }
     }
-    else {
-        alert('Please enter a valid value');
-      }
+     else {
+       alert('Please enter valid text');
+       display_text('');
+     }
 }
 )
 display_text = (array) => {
   const display_text = document.querySelector('.lorem-text');
         display_text.innerHTML = `<p>${array}</p>`;
-}
+};
